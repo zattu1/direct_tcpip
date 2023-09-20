@@ -22,31 +22,16 @@ int main(int argc, char *argv[])
     }
 
     CDirectTcpip *directTcpip = new CDirectTcpip;
-
-    if(argc > 3) {
-        directTcpip->m_nLocalListenPort = atoi(argv[3]);
-    }
-    if(argc > 4) {
-        directTcpip->m_strRemoteDestHost = argv[4];
-    }
-    if(argc > 5) {
-        directTcpip->m_nRemoteDestPort = atoi(argv[5]);
-    }
-    if(argc > 6) {
-        directTcpip->m_bIsPrivateKey = !strcmp(argv[6], "-p")? false: !strcmp(argv[6], "-k")? true: false;
-    }
-    if(argc > 7) {
-        directTcpip->m_strUserName = argv[7];
-    }
-    if(argc > 8) {
-        directTcpip->m_strPassword = argv[8];
-    }
-    if(argc > 9) {
+    directTcpip->m_nLocalListenPort = atoi(argv[3]);
+    directTcpip->m_strRemoteDestHost = argv[4];
+    directTcpip->m_nRemoteDestPort = atoi(argv[5]);
+    directTcpip->m_bIsPrivateKey = !strcmp(argv[6], "-p")? false: !strcmp(argv[6], "-k")? true: false;
+    directTcpip->m_strUserName = argv[7];
+    directTcpip->m_strPassword = argv[8];
+    if(argc > 9)
         directTcpip->m_strPrivateKeyPath = argv[9];
-    }
-    if(argc > 10) {
+    if(argc > 10)
         directTcpip->m_strPublicKeyPath = argv[10];
-    }
 
     int nRet = 0;
     do {
