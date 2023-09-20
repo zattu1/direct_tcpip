@@ -31,9 +31,7 @@ void CDirectTcpip::onStarted()
             }
             forwardPacket();
         }while(0);
-
         freeSession();
-
     }while(m_Loop);
 }
 
@@ -50,7 +48,6 @@ bool CDirectTcpip::connectRemote()
         qWarning() << "connect error:" << rc;
         return false;
     }
-
     return true;
 }
 
@@ -76,7 +73,6 @@ bool CDirectTcpip::sshInitialize()
         qWarning() <<  "Error when starting up SSH session:" << rc;
         return false;
     }
-
     /* At this point we have not yet authenticated.  The first thing to do
      * is check the hostkey's fingerprint against our known hosts Your app
      * may have it hard coded, may go to a file, may present it to the
@@ -114,8 +110,7 @@ bool CDirectTcpip::sshInitialize()
                 qWarning() << "Authentication by password failed!";
                 return false;
             }
-        }
-        else if(auth & AUTH_PUBLICKEY) {
+        }else if(auth & AUTH_PUBLICKEY) {
             if(libssh2_userauth_publickey_fromfile(m_session,
                                                     m_strUserName.toStdString().c_str(),
                                                     m_strPublicKeyPath.toStdString().c_str(),
@@ -124,11 +119,8 @@ bool CDirectTcpip::sshInitialize()
                 qWarning() << "Authentication by public key failed!";
                 return false;
             }
-            else {
-                qDebug() << "Authentication by public key succeeded.";
-            }
-        }
-        else {
+            qDebug() << "Authentication by public key succeeded.";
+        }else {
             qWarning() << "No supported authentication methods found!";
             return false;
         }
@@ -195,7 +187,6 @@ bool CDirectTcpip::connectSsh()
 
     /* Must use non-blocking IO hereafter due to the current libssh2 API */
     libssh2_session_set_blocking(m_session, 0);
-
     return true;
 }
 
