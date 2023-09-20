@@ -131,12 +131,10 @@ loop_end:
             nRet = a.exec();
             emit directTcpip->finished();
         }
-
     }while(0);
 
     WSACleanup();
     libssh2_exit();
     directTcpip->deleteLater();
-
     return nRet;
 }
