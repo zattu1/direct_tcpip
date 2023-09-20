@@ -66,6 +66,7 @@ bool CDirectTcpip::sshInitialize()
     m_session = libssh2_session_init();
     if(!m_session) {
         qWarning() << "Could not initialize SSH session!";
+        return false;
     }
     /* ... start it up. This will trade welcome banners, exchange keys,
      * and setup crypto, compression, and MAC layers
