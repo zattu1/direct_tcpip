@@ -96,7 +96,7 @@ int main(int argc, char *argv[])
             }
         }
 loop_end:
-        if(ptr) {
+        if(result) {
             if(ptr->ai_family != AF_INET)   // IPv4のみ
                 break;
             directTcpip->ai_family = ptr->ai_family;
