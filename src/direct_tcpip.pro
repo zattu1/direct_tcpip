@@ -1,7 +1,7 @@
 QT = core
 
 CONFIG += c++17 cmdline
-LIBS += -L../lib -llibssh2 -lcrypt32 -lbcrypt -lWs2_32
+LIBS += -L../lib -llibssh2 -lWs2_32
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.

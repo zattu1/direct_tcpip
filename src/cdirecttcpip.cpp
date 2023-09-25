@@ -1,4 +1,5 @@
 #include "cdirecttcpip.h"
+#include <QFile>
 #include <QDebug>
 
 #define BUFFER_LEN 16384
@@ -111,12 +112,24 @@ bool CDirectTcpip::sshInitialize()
                 return false;
             }
         }else if(auth & AUTH_PUBLICKEY) {
-            if(libssh2_userauth_publickey_fromfile(m_session,
-                                                    m_strUserName.toStdString().c_str(),
-                                                    m_strPublicKeyPath.toStdString().c_str(),
-                                                    m_strPrivateKeyPath.toStdString().c_str(),
-                                                    m_strPassword.toStdString().c_str())) {
-                qWarning() << "Authentication by public key failed!";
+            QString priKey;
+            QFile pri(m_strPrivateKeyPath);
+            if(pri.open(QIODevice::ReadOnly)) {
+                priKey = pri.readAll();
+                pri.close();
+            }
+            rc = libssh2_userauth_publickey_frommemory(m_session,
+                                                     m_strUserName.toStdString().c_str(),
+                                                     m_strUserName.length(),
+                                                     nullptr,
+                                                     0,
+                                                     priKey.toStdString().c_str(),
+                                                     priKey.length(),
+                                                     m_strPassword.toStdString().c_str());
+            if(rc) {
+                char *error_message;
+                libssh2_session_last_error(m_session, &error_message, nullptr, 0);
+                qWarning() << "Authentication by public key failed!" << error_message;
                 return false;
             }
             qDebug() << "Authentication by public key succeeded.";

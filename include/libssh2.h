@@ -1,6 +1,6 @@
-/* Copyright (c) 2004-2009, Sara Golemon <sarag@libssh2.org>
- * Copyright (c) 2009-2021 Daniel Stenberg
- * Copyright (c) 2010 Simon Josefsson <simon@josefsson.org>
+/* Copyright (C) Sara Golemon <sarag@libssh2.org>
+ * Copyright (C) Daniel Stenberg
+ * Copyright (C) Simon Josefsson <simon@josefsson.org>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms,
@@ -35,24 +35,26 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
  * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
  * OF SUCH DAMAGE.
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
  */
 
 #ifndef LIBSSH2_H
 #define LIBSSH2_H 1
 
-#define LIBSSH2_COPYRIGHT "2004-2023 The libssh2 project and its contributors."
+#define LIBSSH2_COPYRIGHT "The libssh2 project and its contributors."
 
 /* We use underscore instead of dash when appending DEV in dev versions just
    to make the BANNER define (used by src/session.c) be a valid SSH
    banner. Release versions have no appended strings and may of course not
    have dashes either. */
-#define LIBSSH2_VERSION "1.11.0"
+#define LIBSSH2_VERSION                             "1.11.1_DEV"
 
 /* The numeric version number is also available "in parts" by using these
    defines: */
-#define LIBSSH2_VERSION_MAJOR 1
-#define LIBSSH2_VERSION_MINOR 11
-#define LIBSSH2_VERSION_PATCH 0
+#define LIBSSH2_VERSION_MAJOR                       1
+#define LIBSSH2_VERSION_MINOR                       11
+#define LIBSSH2_VERSION_PATCH                       1
 
 /* This is the numeric version of the libssh2 version number, meant for easier
    parsing and comparisons by programs. The LIBSSH2_VERSION_NUM define will
@@ -69,7 +71,7 @@
    and it is always a greater number in a more recent release. It makes
    comparisons with greater than and less than work.
 */
-#define LIBSSH2_VERSION_NUM 0x010b00
+#define LIBSSH2_VERSION_NUM                         0x010b01
 
 /*
  * This is the date and time when the full source package was created. The
@@ -80,7 +82,7 @@
  *
  * "Mon Feb 12 11:35:33 UTC 2007"
  */
-#define LIBSSH2_TIMESTAMP "Tue May 30 03:58:58 PM UTC 2023"
+#define LIBSSH2_TIMESTAMP "DEV"
 
 #ifndef RC_INVOKED
 
@@ -105,7 +107,7 @@ extern "C" {
 /* Allow alternate API prefix from CFLAGS or calling app */
 #ifndef LIBSSH2_API
 # ifdef LIBSSH2_WIN32
-#  if defined(LIBSSH2_EXPORTS) || defined(DLL_EXPORT) || defined(_WINDLL)
+#  if defined(LIBSSH2_EXPORTS) || defined(_WINDLL)
 #   ifdef LIBSSH2_LIBRARY
 #    define LIBSSH2_API __declspec(dllexport)
 #   else

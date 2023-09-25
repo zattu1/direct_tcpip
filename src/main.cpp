@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    if(argc != 9 && argc != 11)
+    if(argc != 9 && argc != 10)
         return -1;
 
     WSADATA wsadata;
@@ -28,9 +28,8 @@ int main(int argc, char *argv[])
     directTcpip->m_bIsPrivateKey = !strcmp(argv[6], "-p")? false: !strcmp(argv[6], "-k")? true: false;
     directTcpip->m_strUserName = argv[7];
     directTcpip->m_strPassword = argv[8];
-    if(argc > 10) {
+    if(argc > 9) {
         directTcpip->m_strPrivateKeyPath = argv[9];
-        directTcpip->m_strPublicKeyPath = argv[10];
     }
     int nRet = 0;
     do {
